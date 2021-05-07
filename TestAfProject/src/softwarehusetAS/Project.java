@@ -7,7 +7,6 @@ public class Project {
 	private String projectName;
 	private String projectNumber;
 	private ProjectManager projectManager;
-	private Employee projectManager1;
 	private int startWeek;
 	private int endWeek;
 	private ArrayList<Activity> activities = new ArrayList<Activity>();
@@ -32,13 +31,11 @@ public class Project {
 	public ProjectManager setManager(Employee employee) {
 		ProjectManager projectManager = new ProjectManager(employee.getInitials());
 		this.projectManager = projectManager;
-		projectManager1 = employee;
 		return projectManager;
-		
 	}
 	
-	public Employee getManager() {
-		return projectManager1;
+	public ProjectManager getManager() {
+		return projectManager;
 	}
 	
 	public void addActivityProject(Activity activity) {

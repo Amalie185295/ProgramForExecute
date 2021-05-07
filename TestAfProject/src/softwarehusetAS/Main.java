@@ -21,17 +21,18 @@ public class Main {
 		ProjectManager projectManager1 = project1.setManager(employee1);
 		ProjectManager projectManager2 = project2.setManager(employee1);
 		ProjectManager projectManager3 = project3.setManager(employee1);
-		projectManager1.addActivity(project1, "Activity", true);
+		Activity activity1=projectManager1.addActivity(project1, "Activity", true);
 
 
 		System.out.print("Please enter your personel ID: ");
 		String checkID = input.next();
 
 
-		if (checkForManager(checkID)) {
+		if (checkForManager(checkID)!=null) {
+			ProjectManager manager = checkForManager(checkID);
 			System.out.println("Choose action: \n 1. Create activity \n 2. Assign employee to activity \n 3. Register hours \n 4. Ask for assistance");
 			int option = input.nextInt();
-			optionsManager(option);
+			optionsManager(option,manager);
 
 		} else if (checkForEmployee(checkID)!=null) {
 			Employee employee = checkForEmployee(checkID);
@@ -47,43 +48,48 @@ public class Main {
 		}
 	}
 
-	public static boolean checkForManager(String checkID) {
+	public static ProjectManager checkForManager(String checkID) {
 		for (Project p : SoftwarehusetAS.getProject()) {
 			if (p.getManager().getInitials().equals(checkID)) {
-				return true;
+				return p.getManager();
 			}
 		}
-		return false;
+		return null;
 	}
 
-	public static Employee checkForEmployee(String checkID) {
-		Employee employee = null;
-		for (Employee e : SoftwarehusetAS.getEmployees()) {
-			if (e.getInitials().equals(checkID)) {
-				employee = e;
-			}
-		}
-		return employee;
+	public static Employee checkForEmployee(String checkID) throws OperationNotAllowedException{
+		return SoftwarehusetAS.findEmployee(checkID);
 	}
 
-	public static void optionsManager(int option) throws OperationNotAllowedException {
+	public static void optionsManager(int option, ProjectManager manager) throws OperationNotAllowedException {
 		Scanner input = new Scanner(System.in);
 		switch (option) {
 
 			case 1:
-				System.out.println("input activity name");
-				String ActivityName = input.nextLine();
-				Activity activity1 = new Activity(ActivityName, true);
+				System.out.println("input project number and activity name");
+				String projectNumber = input.nextLine();
+				String activityName = input.nextLine();
+				Project project = SoftwarehusetAS.findProject(projectNumber);
+				Activity activity= manager.addActivity(project, activityName, true);
+				System.out.println(activity.getName() + "is created under project:" + project.getName());
 
 			case 2:
 				System.out.println("input employee initials");
 				String employeeInitials= input.nextLine();
 				System.out.println("input project number and activity name");
-				String projectNumber = input.nextLine();
-				String activityName = input.nextLine();
+				projectNumber = input.nextLine();
+				activityName = input.nextLine();
 
-				Employee employee1 = SoftwarehusetAS.findEmployee(employeeInitials);
-				Project project = SoftwarehusetAS.findProject(projectNumber);
+				Employee employee = SoftwarehusetAS.findEmployee(employeeInitials);
+				project = SoftwarehusetAS.findProject(projectNumber);
+				activity = project.findActivity(activityName);
+				manager.staffActivity(employee, activity);
+				System.out.println(employee.getInitials() +"is added to the activity:" + activity.getName());
+				
+			case 3:
+				optionsEmployee(1, manager);
+			case 4:
+				optionsEmployee(2, manager);		
 		}
 	}
 
@@ -102,9 +108,10 @@ public class Main {
 				String hoursString = input.nextLine();
 				double hours = Double.parseDouble(hoursString);
 				employee.addHours(hours, activity);
-				System.out.println(activity.getHours());
+				System.out.println(hours + "was added to activity" + activity.getName());
 
 			case 2:
+				
 
 		}
 	}
@@ -117,19 +124,23 @@ public class Main {
 				String projectName = input.nextLine();
 				String year = input.nextLine();
 				SoftwarehusetAS.addProject(projectName, year);
-
-			case 2:
-				System.out.println("input employee initials and and project name");
+				System.out.println(projectName + "was created");
+				
+			case 2: 
+				System.out.println("input employee initials");
 				String initials = input.nextLine();
+				Employee employee= SoftwarehusetAS.addEmployee(initials);
+				System.out.println("welcome to the company" + employee.getInitials() + "!");
+
+			case 3:
+				System.out.println("input employee initials and and project name");
+				initials = input.nextLine();
 				projectName = input.nextLine();
 
 				Employee manager = SoftwarehusetAS.findEmployee(initials);
 				Project Project = SoftwarehusetAS.findProject(projectName);
-						for (Project p : SoftwarehusetAS.getProject()) {
-							if (projectName.equals(p.getName())) {
-								p.setManager(manager);
-						}
-					}
+				Project.setManager(manager);
+				System.out.println(manager.getInitials()+"was assigned manager of project"+ Project.getName());
 				}
 			}
 		}
