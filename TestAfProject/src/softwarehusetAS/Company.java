@@ -30,4 +30,23 @@ public class Company {
 		employees.add(employee1);
 		return employee1;
 	}
+
+	public Project findProject(String number) throws OperationNotAllowedException{
+		for (Project p : projects){
+			if (number.equals(p.getProjectNumber())) {
+				return p;
+			}
+		}
+		throw new OperationNotAllowedException("The project does not exist!");
+	}
+
+
+	public Employee findEmployee(String initials) throws OperationNotAllowedException{
+		for (Employee e: employees){
+			if (initials.equals(e.getInitials())) {
+				return e;
+			}
+		}
+		throw new OperationNotAllowedException("Employee does not exist");
+	}
 }

@@ -29,7 +29,7 @@ public class Main {
 
 
 		if (checkForManager(checkID)) {
-			System.out.println("Choose action: \n 1. Create activity \n 2. Assign employee to activity");
+			System.out.println("Choose action: \n 1. Create activity \n 2. Assign employee to activity \n 3. Register hours \n 4. Ask for assistance");
 			int option = input.nextInt();
 			optionsManager(option);
 
@@ -66,7 +66,7 @@ public class Main {
 		return employee;
 	}
 
-	public static void optionsManager(int option) {
+	public static void optionsManager(int option) throws OperationNotAllowedException {
 		Scanner input = new Scanner(System.in);
 		switch (option) {
 
@@ -76,7 +76,14 @@ public class Main {
 				Activity activity1 = new Activity(ActivityName, true);
 
 			case 2:
+				System.out.println("input employee initials");
+				String employeeInitials= input.nextLine();
+				System.out.println("input project number and activity name");
+				String projectNumber = input.nextLine();
+				String activityName = input.nextLine();
 
+				Employee employee1 = SoftwarehusetAS.findEmployee(employeeInitials);
+				Project project = SoftwarehusetAS.findProject(projectNumber);
 		}
 	}
 
@@ -84,34 +91,25 @@ public class Main {
 		Scanner input = new Scanner(System.in);
 		switch (option) {
 			case 1:
-				Project project;
-				Activity activity;
-				System.out.println("input the project");
-				String projectName = input.nextLine();
+				System.out.println("input the project number and activity name");
+				String projectNumber = input.nextLine();
+				String activityName = input.nextLine();
 
-				for (Project p : SoftwarehusetAS.getProject()){
-					if (projectName.equals(p.getName())){
-						project = p;
-						System.out.println("input the activity");
-						String activityName = input.nextLine();
+				Project project = SoftwarehusetAS.findProject(projectNumber);
+				Activity activity = project.findActivity(activityName);
 
-						for (Activity a : project.getActivity()){
-							if(activityName.equals(a.getName()));
-							activity = a;
-							System.out.println("input hours");
-							String hoursString = input.nextLine();
-							double hours = Double.parseDouble(hoursString);
-							employee.addHours(hours, activity);
-							System.out.println(activity.getHours());
-						}
-					}
-				}
+				System.out.println("input hours");
+				String hoursString = input.nextLine();
+				double hours = Double.parseDouble(hoursString);
+				employee.addHours(hours, activity);
+				System.out.println(activity.getHours());
+
 			case 2:
 
 		}
 	}
 
-	public static void optionsCompany(int option) {
+	public static void optionsCompany(int option) throws OperationNotAllowedException {
 		Scanner input = new Scanner(System.in);
 		switch (option) {
 			case 1:
@@ -124,10 +122,9 @@ public class Main {
 				System.out.println("input employee initials and and project name");
 				String initials = input.nextLine();
 				projectName = input.nextLine();
-				Employee manager;
-				for (Employee e : SoftwarehusetAS.getEmployees()) {
-					if (initials.equals(e.getInitials())) {
-						manager = e;
+
+				Employee manager = SoftwarehusetAS.findEmployee(initials);
+				Project Project = SoftwarehusetAS.findProject(projectName);
 						for (Project p : SoftwarehusetAS.getProject()) {
 							if (projectName.equals(p.getName())) {
 								p.setManager(manager);
@@ -136,5 +133,3 @@ public class Main {
 				}
 			}
 		}
-	}
-}

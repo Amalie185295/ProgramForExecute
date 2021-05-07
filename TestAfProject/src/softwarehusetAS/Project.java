@@ -60,5 +60,12 @@ public class Project {
 		return endWeek;
 	}
 	
-	
+	public Activity findActivity(String activityName) throws OperationNotAllowedException{
+		for (Activity a: activities){
+			if (activityName.equals(a.getName())){
+				return a;
+			}
+		}
+		throw new OperationNotAllowedException("Activity does not exist");
+	}
 }
