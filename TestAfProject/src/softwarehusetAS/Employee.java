@@ -117,4 +117,15 @@ public class Employee {
 	public ArrayList<Activity> getAssisting(){
 	    return activitiesAssisting;
 	}
+
+	public void askCoworker(Employee employee, Activity activity){
+		employee.addEmployeeAssisting(activity);
+	}
+
+	public void addEmployeeAssisting(Activity activity){
+		if (this.checkAvailability()) {
+			activity.addAssisting(this);
+			this.activitiesAssisting.add(activity);
+		}
+	}
 }

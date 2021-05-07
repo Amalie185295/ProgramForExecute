@@ -111,7 +111,14 @@ public class Main {
 				System.out.println(hours + "was added to activity" + activity.getName());
 
 			case 2:
-				
+				System.out.println("input your coworkers name, project number and the activity name");
+				String coworkerName = input.nextLine();
+				projectNumber = input.nextLine();
+				activityName = input.nextLine();
+				Employee coworker = SoftwarehusetAS.findEmployee(coworkerName);
+				project = SoftwarehusetAS.findProject(projectNumber);
+				activity = project.findActivity(activityName);
+				employee.askCoworker(coworker, activity);
 
 		}
 	}
@@ -133,12 +140,12 @@ public class Main {
 				System.out.println("welcome to the company" + employee.getInitials() + "!");
 
 			case 3:
-				System.out.println("input employee initials and and project name");
+				System.out.println("input employee initials and and project number");
 				initials = input.nextLine();
-				projectName = input.nextLine();
+				String projectNumber = input.nextLine();
 
 				Employee manager = SoftwarehusetAS.findEmployee(initials);
-				Project Project = SoftwarehusetAS.findProject(projectName);
+				Project Project = SoftwarehusetAS.findProject(projectNumber);
 				Project.setManager(manager);
 				System.out.println(manager.getInitials()+"was assigned manager of project"+ Project.getName());
 				}

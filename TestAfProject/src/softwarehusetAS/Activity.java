@@ -84,4 +84,7 @@ public class Activity {
 	public String getName(){
 		return name;
 	}
+	public void addAssisting(Employee employee){
+		employeesAssisting.add(employee);
+	}
 }
