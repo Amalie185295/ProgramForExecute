@@ -46,6 +46,9 @@ public class Main {
 			optionsCompany(option);
 
 		}
+		else {
+			System.out.println("Please enter a valid ID");
+		}
 	}
 
 	public static ProjectManager checkForManager(String checkID) {
