@@ -1,5 +1,7 @@
 package softwarehusetAS;
- 
+
+import java.util.ArrayList;
+
 public class ProjectManager extends Employee{
 
 	public ProjectManager(String initials) {
@@ -32,6 +34,15 @@ public class ProjectManager extends Employee{
 	}
 	public void takeAwayEmployeePermission(Employee employee) {
 		employee.takeAwayPermission();
+	}
+
+	public ArrayList<String> getReport(Project project){
+		ArrayList<String> report = new ArrayList<String>();
+		for (Activity a : project.getActivity()){
+			String str = a.getName() + " " + String.valueOf(a.getHours());
+			report.add(str);
+		}
+		return report;
 	}
 	
 }

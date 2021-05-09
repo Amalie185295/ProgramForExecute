@@ -41,13 +41,8 @@ public class Activity {
 	    if(employee.checkAvailability()){
 	         employees.add(employee);
 	    }
-		
 	}
-	
-	public String toString() {
-		return name;
-	}
-	
+
 	public Double getHours() {
 		return hoursOnActivity;
 	}
@@ -68,11 +63,8 @@ public class Activity {
 		isActive = false;
 		for (Employee e : employees) {
 			e.getActivities().remove(this);
-			
 		}
-		
 	}
-	
 	public ArrayList<Employee> getEmployees(){
 		return employees;
 	}
@@ -86,5 +78,9 @@ public class Activity {
 	}
 	public void addAssisting(Employee employee){
 		employeesAssisting.add(employee);
+	}
+
+	public String toString(){
+		return "Name : " + name + "\n Hours : "+ hoursOnActivity + "\n Start week : "+ startWeek + "\n End week : " + endWeek;
 	}
 }

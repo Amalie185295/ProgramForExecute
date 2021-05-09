@@ -6,7 +6,7 @@ public class Company {
 
 	private ArrayList<Project> projects = new ArrayList<Project>();
 	private ArrayList<Employee> employees = new ArrayList<Employee>();
-	private int runningNumber = 0;
+	private int runningNumber = 1;
 	public ArrayList<Project> getProject() {
 		return projects;
 	}

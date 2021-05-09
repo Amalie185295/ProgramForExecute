@@ -9,7 +9,7 @@ public class Employee {
 	private ArrayList<Activity> activities = new ArrayList<Activity>();
 	private ArrayList<Activity> activitiesAssisting = new ArrayList<Activity>();
 	private ArrayList<Activity> standardActivity = new ArrayList<>
-			(Arrays.asList(new Activity("sick",false), new Activity("maternity",false), new Activity("vacation",false), new Activity("education",false)));
+			(Arrays.asList(new Activity("Sick",false), new Activity("Maternity",false), new Activity("Vacation",false), new Activity("Education",false)));
 	private boolean hasPermission = false;
 	private int activeActivities1 = 0;
 	private int approvedActivities = 10;
@@ -20,7 +20,7 @@ public class Employee {
 	
 	public void updateHours(double before, double after, Activity activity) throws OperationNotAllowedException  {
 		if (!(activity.isActivityActive() && this.checkAvailability())) {
-				throw new OperationNotAllowedException(" ");
+				throw new OperationNotAllowedException("Activity is not active");
 		} else {
 			double newHours = after - before;
 			activity.addToHours(newHours);
@@ -28,7 +28,7 @@ public class Employee {
 	}
 	public void addHours(double hours, Activity activity) throws OperationNotAllowedException {
 		if(!(activity.isActivityActive() && this.checkAvailability())){
-			throw new OperationNotAllowedException("");
+			throw new OperationNotAllowedException("Activity is not active");
 		} else{
 			activity.addToHours(hours);
 		}
