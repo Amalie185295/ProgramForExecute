@@ -42,7 +42,7 @@ public class Company {
 
 
 	public Employee findEmployee(String initials) throws OperationNotAllowedException{
-		for (Employee e: employees){
+		for (Employee e : employees) {
 			if (initials.equals(e.getInitials())) {
 				return e;
 			}

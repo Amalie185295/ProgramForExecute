@@ -9,7 +9,7 @@ public class ProjectManager extends Employee{
 		
 	}
 	
-	public Activity addActivity(Project project, String activityName, boolean isActive) {
+	public Activity addActivity(Project project, String activityName, boolean isActive){
 		Activity activity = new Activity(activityName,isActive);
 		project.addActivityProject(activity);
 		return activity;
