@@ -90,7 +90,7 @@ public class Main {
         return null;
     }
 
-    public static Employee checkForEmployee(String checkID) throws OperationNotAllowedException {
+    public static Employee checkForEmployee(String checkID) {
             for (Employee e : SoftwarehusetAS.getEmployees()) {
                 if (e.getInitials().equals(checkID)) {
                     return e;
