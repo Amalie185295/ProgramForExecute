@@ -53,7 +53,7 @@ public class Main {
         else if (checkForManager(checkID) != null) {
             ProjectManager manager = checkForManager(checkID);
             while (run) {
-                System.out.println("Choose action: \n 1. Create activity \n 2. Assign employee to activity \n 3. Register hours \n 4. Ask for assistance \n 5. Add details to project \n 6. Create report \n 7. Register hours on standard activity \n 8. exit");
+                System.out.println("Choose action: \n 1. Create activity \n 2. Assign employee to activity \n 3. Register hours \n 4. Ask for assistance \n 5. Add details to project \n 6. Create report \n 7. Register hours on standard activity \n 8. Give an employee permission \n 9. Take away employee permission \n 10. exit");
                 try {
                     int option = input.nextInt();
                     optionsManager(option, manager);
@@ -187,6 +187,32 @@ public class Main {
             case 7: optionsEmployee(3,manager);
 
             case 8:
+                System.out.println("input the employee");
+                String employeeName = input.nextLine();
+                try{
+                    Employee employee = SoftwarehusetAS.findEmployee(employeeName);
+                    manager.giveEmployeePermission(employee);
+                    System.out.println("Employee " + employeeName + " now has permission to work on 20 activities");
+                }
+                catch (OperationNotAllowedException e){
+                    System.out.println("Employee does not exist");
+                }
+                break;
+
+            case 9:
+                System.out.println("input the employee");
+                employeeName = input.nextLine();
+                try{
+                    Employee employee = SoftwarehusetAS.findEmployee(employeeName);
+                    manager.takeAwayEmployeePermission(employee);
+                    System.out.println("Employee " + employeeName + " now has permission to work on 10 activities");
+                }
+                catch (OperationNotAllowedException e){
+                    System.out.println("Employee does not exist");
+                }
+                break;
+
+            case 10:
                 run = false;
                 break;
         }
