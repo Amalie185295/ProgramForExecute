@@ -1,5 +1,5 @@
 package softwarehusetAS;
-
+//Skrevet af Amalie T
 import java.util.ArrayList;
 import java.util.Arrays;
 

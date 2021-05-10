@@ -1,5 +1,5 @@
 package softwarehusetAS;
-
+//Første del af Amalie H
 import com.sun.jdi.DoubleValue;
 
 import java.util.Scanner;
@@ -217,7 +217,7 @@ public class Main {
                 break;
         }
     }
-
+//Anden del skrevet af Eva
     public static void optionsEmployee(int option, Employee employee) throws OperationNotAllowedException {
         Scanner input = new Scanner(System.in);
         switch (option) {

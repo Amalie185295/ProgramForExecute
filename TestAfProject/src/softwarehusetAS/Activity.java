@@ -1,5 +1,5 @@
 package softwarehusetAS;
-
+//Skrevet af Amalie H
 import java.util.ArrayList;
 
 public class Activity {
