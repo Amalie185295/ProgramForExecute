@@ -27,12 +27,12 @@ public class Employee {
 		}
 	}
 	public void addHours(double hours, Activity activity) throws OperationNotAllowedException {
-		if(!(activity.isActivityActive())){
-			throw new OperationNotAllowedException("Activity is not active");
-		} else{
-			activity.addToHours(hours);
+			if (!(activity.isActivityActive())) {
+				throw new OperationNotAllowedException("Activity is not active");
+			} else {
+				activity.addToHours(hours);
+			}
 		}
-	}
 	
 	 public boolean checkAvailability() {
 		int activeActivities = 0;

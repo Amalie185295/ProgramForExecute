@@ -232,34 +232,61 @@ public class Main {
                     System.out.println("input hours");
                     String hoursString = input.nextLine();
                     double hours = Double.parseDouble(hoursString);
-                    employee.addHours(hours, activity);
-                    System.out.println(hours + " was added to activity " + activity.getName());
+                    if(hours < 0){
+                        System.out.println("input a positive number");
+                         hoursString = input.nextLine();
+                         hours = Double.parseDouble(hoursString);
+                    }
+                    else{
+                        employee.addHours(hours, activity);
+                        System.out.println(hours + " was added to activity " + activity.getName());
+                    }
+
                 }
                 catch (OperationNotAllowedException e){
                     System.out.println("Project or Activity does not exist");
                 }
-
                 break;
 
             case 2:
                 System.out.println("input the project number and activity name");
                 projectNumber = input.nextLine();
                 activityName = input.nextLine();
+                double hoursAfter = 0.0;
+                double hoursBefore = 0.0;
                 try{
                     Project project = SoftwarehusetAS.findProject(projectNumber);
                     Activity activity = project.findActivity(activityName);
-                    System.out.println("input the before and after hours");
+                    System.out.println("input the before hours");
 
-                    if(input.hasNextDouble()) {
+                    try {
                         String beforeHoursString = input.nextLine();
-                        double hoursBefore = Double.parseDouble(beforeHoursString);
-                        if(input.hasNextDouble()) {
-                            String afterHoursString = input.nextLine();
-                            double hoursAfter = Double.parseDouble(afterHoursString);
-                            employee.updateHours(hoursBefore, hoursAfter, activity);
-                            System.out.println("The hours on " + activity.getName() + " is now updated");
+                        hoursBefore = Double.parseDouble(beforeHoursString);
+                        if(hoursBefore < 0) {
+                            System.out.println("Input a positive number");
+                            beforeHoursString = input.nextLine();
+                            hoursBefore = Double.parseDouble(beforeHoursString);
                         }
+                        System.out.println("input the after hours");
+                    } catch (NumberFormatException e) {
+                        System.out.println("input a number");
                     }
+                    try{
+                        String afterHoursString = input.nextLine();
+                        hoursAfter = Double.parseDouble(afterHoursString);
+                        if(hoursAfter < 0) {
+                            System.out.println("Input a positive number");
+                            afterHoursString = input.nextLine();
+                            hoursAfter = Double.parseDouble(afterHoursString);
+                        }
+                        employee.updateHours(hoursBefore, hoursAfter, activity);
+                        System.out.println("The hours on " + activity.getName() + " is now updated");
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("input a number");
+                    }
+
+
                 }
                 catch (OperationNotAllowedException e){
                     System.out.println("Project does not exist");
