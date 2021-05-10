@@ -40,7 +40,6 @@ public class Company {
 		throw new OperationNotAllowedException("The project does not exist!");
 	}
 
-
 	public Employee findEmployee(String initials) throws OperationNotAllowedException{
 		for (Employee e : employees) {
 			if (initials.equals(e.getInitials())) {

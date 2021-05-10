@@ -19,7 +19,7 @@ public class Employee {
 	}
 	
 	public void updateHours(double before, double after, Activity activity) throws OperationNotAllowedException  {
-		if (!(activity.isActivityActive() && this.checkAvailability())) {
+		if (!(activity.isActivityActive())) {
 				throw new OperationNotAllowedException("Activity is not active");
 		} else {
 			double newHours = after - before;
@@ -27,7 +27,7 @@ public class Employee {
 		}
 	}
 	public void addHours(double hours, Activity activity) throws OperationNotAllowedException {
-		if(!(activity.isActivityActive() && this.checkAvailability())){
+		if(!(activity.isActivityActive())){
 			throw new OperationNotAllowedException("Activity is not active");
 		} else{
 			activity.addToHours(hours);
